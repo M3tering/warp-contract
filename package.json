@@ -1,0 +1,18 @@
+{
+  "name": "dummy-warp-contract",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "deploy": "node tools/deploy.js",
+    "deployMeter": "node tools/simulateMeters.js",
+    "callContract": "node tools/callContract.js"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "warp-contracts": "^1.4.33",
+    "warp-contracts-plugin-deploy": "^1.0.13"
+  }
+}
