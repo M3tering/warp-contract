@@ -22,11 +22,11 @@ function handle_subtract_event(state, action){
 
 
     function subtract_usage_from_balance(){
+        state.kwh_balance - payload.usage.kwh
+
         if(state.kwh_balance <= 0){
             state.is_on = false
         }
-
-        payload.usage.kwh
     }
     return {state}
 }
