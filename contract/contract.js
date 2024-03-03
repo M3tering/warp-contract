@@ -1,4 +1,4 @@
-import { validate_payload } from "../logic.mjs"
+import { validate_payload } from "../logic"
 
 export function handle(state, action){
 
@@ -22,17 +22,14 @@ function handle_subtract_event(state, action){
 
 
     function subtract_usage_from_balance(){
-        state.kwh_balance - payload.usage.kwh
-
+        let newBalance = state.kwh_balance - payload.u.e
+        state.kwh_balance = newBalance
         if(state.kwh_balance <= 0){
             state.is_on = false
         }
     }
     return {state}
 }
-
-
-
 
 /*state = {
     kwh_balance: f64,

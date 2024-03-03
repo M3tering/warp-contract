@@ -12,7 +12,7 @@ let warp = environment == "testnet" ? WarpFactory.forTestnet().use(new DeployPlu
 
 async function deploy(){
     try{
-        const contractSrc = fs.readFileSync(path.join(__dirname, "../contract/contract.js"), "utf8")
+        const contractSrc = fs.readFileSync(path.join(__dirname, "../bundle/contract.js"), "utf8")
         
         let jwk = await getWallet()
 
