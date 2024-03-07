@@ -15,7 +15,7 @@ async function deploy(meter, sourceTxId){
 
         const initialState =  {
             kwh_balance: 800,
-            public_key: await warp.arweave.wallets.getAddress(jwk),
+            public_key: "FB568A7990ACA6ECC83339FD66D137C79278795E4975753393F6566FA1660AC3" /*await warp.arweave.wallets.getAddress(jwk)*/ ,
             nft_id: 2,
             tariff: 0.231,
             nonce: 0,

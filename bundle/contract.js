@@ -784,14 +784,14 @@
 
   // logic.js
   async function validate_payload(payload, pubkey) {
-    let message = JSON.stringify(payload.u);
-    let signature = payload.s;
+    let message = JSON.stringify(payload[2]);
+    let signature = payload[1];
     let isValid = await verify(signature, message, pubkey);
     return isValid;
   }
 
   // contract/contract.js
-  export function handle(state, action) {
+  function handle(state, action) {
     if (action.input.function == "subtract_energy_usage_state") {
       return handle_subtract_event(state, action);
     }
@@ -808,7 +808,8 @@
       throw new ContractError("Payload is not valid");
     }
     function subtract_usage_from_balance() {
-      let newBalance = state.kwh_balance - payload.u.e;
+      let payload_kwh = payload[2][2];
+      let newBalance = state.kwh_balance - payload_kwh * 0.167;
       state.kwh_balance = newBalance;
       if (state.kwh_balance <= 0) {
         state.is_on = false;

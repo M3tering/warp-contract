@@ -12,6 +12,9 @@ function handle_subtract_event(state, action){
     let pubkey = state.public_key
     if(!payload) throw new ContractError('Interaction payload missing')
 
+    let nonce = payload[0]
+    if(nonce < state.nonce) throw new ContractError('Invalid nonce')
+    
     let isPayloadValid = validate_payload(payload, pubkey)
 
     if(isPayloadValid){
@@ -22,7 +25,8 @@ function handle_subtract_event(state, action){
 
 
     function subtract_usage_from_balance(){
-        let newBalance = state.kwh_balance - payload.u.e
+        let payload_kwh = payload[2][2]
+        let newBalance = state.kwh_balance - (payload_kwh * 0.167)
         state.kwh_balance = newBalance
         if(state.kwh_balance <= 0){
             state.is_on = false
@@ -30,6 +34,8 @@ function handle_subtract_event(state, action){
     }
     return {state}
 }
+
+//payload = ["contractId", "signature", [nonce, current, energy]]
 
 /*state = {
     kwh_balance: f64,
