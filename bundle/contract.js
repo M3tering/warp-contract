@@ -801,6 +801,9 @@
     let pubkey = state.public_key;
     if (!payload)
       throw new ContractError("Interaction payload missing");
+    let nonce = payload[0];
+    if (nonce < state.nonce)
+      throw new ContractError("Invalid nonce");
     let isPayloadValid = validate_payload(payload, pubkey);
     if (isPayloadValid) {
       subtract_usage_from_balance();
