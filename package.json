@@ -8,13 +8,13 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "deploy": "node tools/deploy.cjs",
     "build": "node build.js",
-    "deployMeter": "node tools/simulateMeters.js",
-    "callContract": "node tools/callContract.js"
+    "deployMeter": "node tools/simulateMeters.cjs",
+    "callContract": "node tools/callContract.cjs"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@noble/ed25519": "^1.7.3",
+    "@stablelib/ed25519": "^1.0.3",
     "warp-contracts": "^1.4.33",
     "warp-contracts-plugin-deploy": "^1.0.13"
   },

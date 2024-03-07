@@ -10,17 +10,11 @@ let warp = WarpFactory.forMainnet()
 async function interact(meterContractSrc){
     let contract = warp.contract(meterContractSrc).connect(new ArweaveSigner(wallet))
     let interactionResult = await contract.writeInteraction({
-    data:{
-        usage: {
-            kwh:50.54,
-            ts:new Date()
-        },
-        sig:"B86BCBF6022AE6911E450C535E3AC36D28705F6AB7B93852333C7D63DC693EFF78827A4183DAA3C93DA51A2F435AF970FB5055DEFE461B4E4CC55536B70A7E02"
-    },
+    data:[meterContractSrc, "ACB4C753D19216B1FF20A03F7B4A5087A36C4E98F617E09F5054EA5500A704921D9EBB55D703953660DE221A20E1DA15CC3843065D5B86E85DF110FF4526E908", [1,4.84,1]],
     function:"subtract_energy_usage_state",
 })
     console.log(interactionResult)
 }
 
-interact("38IshD9loN0I-GXWKMtXK-Ed-UAlZ_XdHe9pSJ782UY")
+interact("haFXGvnQP5YYUGTbxxmSok0e4nFgTwhCZYAS0vfk_Tk")
 

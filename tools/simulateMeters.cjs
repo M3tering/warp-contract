@@ -52,4 +52,4 @@ async function getWallet(meter){
     }
 }
 
-deploy("meter1", "t6HX7ne5uWc68qtjqvn-6miKC9hqI1U2pw7pvRT7xPU")
+deploy("meter1", '3A6McG7BWfyrpslS1tl5IrF1Z1rAeV0-OJbwybkFHZw')
