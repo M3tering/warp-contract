@@ -6,15 +6,19 @@ const path = require("path");
 let wallet = JSON.parse(fs.readFileSync(path.join(__dirname, "../jwk.json"), "utf8"))
 let warp = WarpFactory.forMainnet()
 
+ function base64toUint8Aray(base64string){
+    return Uint8Array.from(Buffer.from(base64string, 'base64'))
+ }
 
+  let convertedSignature = base64toUint8Aray("2RsrCY9Havfrw500CyRQDPHC2UZONk9mNeOhom9z2cIFhH_Vo4BIoLcQSuYdFBKl3vMyNPEg8a3NECw701VWCA")
 async function interact(meterContractSrc){
     let contract = warp.contract(meterContractSrc).connect(new ArweaveSigner(wallet))
-    let interactionResult = await contract.writeInteraction({
-    data:[meterContractSrc, "ACB4C753D19216B1FF20A03F7B4A5087A36C4E98F617E09F5054EA5500A704921D9EBB55D703953660DE221A20E1DA15CC3843065D5B86E85DF110FF4526E908", [1,4.84,1]],
-    function:"subtract_energy_usage_state",
-})
-    console.log(interactionResult)
+    let interactionResult = await contract.dryWrite({
+    data:[meterContractSrc, convertedSignature, [1,4.84,100]],
+    function:"subtract_energy_usage_stat",
+}, "none")
+    console.log("result", interactionResult, "length", convertedSignature.length, "converted", convertedSignature)
 }
 
-interact("haFXGvnQP5YYUGTbxxmSok0e4nFgTwhCZYAS0vfk_Tk")
+interact("j-COKnOi-Y2Y9bjOVQbt4hDlJclHkaxjMuzVRjFfiJs")
 

@@ -2147,34 +2147,41 @@
   var stablelib = __toESM(require_ed25519(), 1);
   async function validate_payload(payload, pubkey) {
     let message = JSON.stringify(payload[2]);
+    let convertedMessage = convertBase64StringtoUint8Array(message);
     let signature = payload[1];
-    let isValid = stablelib.verify(pubkey, message, signature);
+    let convertedSignature = convertBase64StringtoUint8Array(signature);
+    let isValid = stablelib.verify(pubkey, convertedMessage, convertedSignature);
     return isValid;
+  }
+  function convertBase64StringtoUint8Array(base64string) {
+    return Uint8Array.from(Buffer.from(base64string, "base64"));
   }
 
   // contract/contract.js
   export function handle(state, action) {
-    if (action.input.function == "subtract_energy_usage_state") {
+    if (action.input.function === "subtract_energy_usage_state") {
       return handle_subtract_event(state, action);
     }
+    throw new ContractError("function not recognised");
   }
   function handle_subtract_event(state, action) {
     let payload = action.input.data;
     let pubkey = state.public_key;
+    let convertedPubKey = convertBase64StringtoUint8Array(pubkey);
     if (!payload)
       throw new ContractError("Interaction payload missing");
     let nonce = payload[0];
     if (nonce < state.nonce)
       throw new ContractError("Invalid nonce");
-    let isPayloadValid = validate_payload(payload, pubkey);
-    if (isPayloadValid) {
+    let isPayloadValid = validate_payload(payload, convertedPubKey);
+    if (isPayloadValid === true) {
       subtract_usage_from_balance();
     } else {
       throw new ContractError("Payload is not valid");
     }
     function subtract_usage_from_balance() {
       let payload_kwh = payload[2][2];
-      let newBalance = state.kwh_balance - payload_kwh * 0.167;
+      let newBalance = state.kwh_balance - payload_kwh * state.tariff;
       state.kwh_balance = newBalance;
       if (state.kwh_balance <= 0) {
         state.is_on = false;
