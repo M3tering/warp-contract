@@ -14,15 +14,16 @@ async function interact(meterContractSrc) {
     .connect(new ArweaveSigner(wallet));
   let interactionResult = await contract.dryWrite(
     {
-      data: ["XUO7gdG9av1XZt3wqMLb8+FUlkgnpZstvYi9g4NAUhk=", "BESz9DprHAtUqiPwiYio/ZNr2f4Q5ZQXzLIK8V/QqfeE/iQ3ThR5tAg2bUIKq6eTGPqA0YucmsABX6tFO5TuAQ==", [1,7.23,15.7]],
-      function: "subtract_energy_usage_state",
+      data: [
+        "XUO7gdG9av1XZt3wqMLb8+FUlkgnpZstvYi9g4NAUhk=",
+        "BESz9DprHAtUqiPwiYio/ZNr2f4Q5ZQXzLIK8V/QqfeE/iQ3ThR5tAg2bUIKq6eTGPqA0YucmsABX6tFO5TuAQ==",
+        [1, 7.23, 15.7],
+      ],
+      function: "meter",
     },
     "none"
   );
-  console.log(
-    "result",
-    interactionResult,
-  );
+  console.log("result", interactionResult);
 }
 
 interact("WvFd62VLYuW3GGqRgWTmMyGTVeQn_G6SELzO1mI1p8U");
