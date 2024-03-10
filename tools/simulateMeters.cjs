@@ -1,55 +1,67 @@
-const {DeployPlugin, ArweaveSigner} = require("warp-contracts-plugin-deploy")
-const {WarpFactory} = require("warp-contracts")
+const { DeployPlugin, ArweaveSigner } = require("warp-contracts-plugin-deploy");
+const { WarpFactory } = require("warp-contracts");
 
-const fs = require("fs")
-const path = require("path")
+const fs = require("fs");
+const path = require("path");
 
-const environment = "mainnet"
-let warp = environment == "testnet" ? WarpFactory.forTestnet().use(new DeployPlugin()) : WarpFactory.forMainnet().use(new DeployPlugin());
+const environment = "mainnet";
+let warp =
+  environment == "testnet"
+    ? WarpFactory.forTestnet().use(new DeployPlugin())
+    : WarpFactory.forMainnet().use(new DeployPlugin());
 
+async function deploy(meter, sourceTxId) {
+  try {
+    // const contractSrc = fs.readFileSync(path.join(__dirname, "../contract/contract.js"), "utf8")
+    let jwk = await getWallet(meter);
 
-async function deploy(meter, sourceTxId){
-    try{
-       // const contractSrc = fs.readFileSync(path.join(__dirname, "../contract/contract.js"), "utf8")
-        let jwk = await getWallet(meter)
+    const initialState = require("./initialState.json");
 
-        const initialState =  {
-            kwh_balance: 800,
-            public_key: "FB568A7990ACA6ECC83339FD66D137C79278795E4975753393F6566FA1660AC3" /*await warp.arweave.wallets.getAddress(jwk)*/ ,
-            nft_id: 2,
-            tariff: 0.231,
-            nonce: 0,
-            is_on: true,
-        }
-        console.log("address:", warp.arweave.wallets.getAddress(jwk), "wallet:", typeof jwk, jwk)
+    console.log(
+      "address:",
+      warp.arweave.wallets.getAddress(jwk),
+      "wallet:",
+      typeof jwk,
+      jwk
+    );
 
-        const contractDets = await warp.deployFromSourceTx({
-            wallet: new ArweaveSigner(jwk),
-            initState: JSON.stringify(initialState),
-            srcTxId: sourceTxId,
-        })
+    const contractDets = await warp.deployFromSourceTx({
+      wallet: new ArweaveSigner(jwk),
+      initState: JSON.stringify(initialState),
+      srcTxId: sourceTxId,
+    });
 
-        if(environment == "testnet"){
-            fs.writeFileSync(path.join(__dirname, `../${meter}contractdets.json`), JSON.stringify(contractDets))
-        }else{
-            fs.writeFileSync(path.join(__dirname, `../${meter}mainnetContractDets.json`), JSON.stringify(contractDets))
-        }
-        console.log(contractDets)
-
-    }catch(err){
-        console.log("deploy error: ", err)
+    if (environment == "testnet") {
+      fs.writeFileSync(
+        path.join(__dirname, `../${meter}contractdets.json`),
+        JSON.stringify(contractDets)
+      );
+    } else {
+      fs.writeFileSync(
+        path.join(__dirname, `../${meter}mainnetContractDets.json`),
+        JSON.stringify(contractDets)
+      );
     }
+    console.log(contractDets);
+  } catch (err) {
+    console.log("deploy error: ", err);
+  }
 }
 
-async function getWallet(meter){
-    try{
-      let jwk = JSON.parse(fs.readFileSync(path.join(__dirname, `../${meter}jwk.json`), "utf8"))
-      return jwk
-    }catch(err){
-        let jwk = await warp.arweave.wallets.generate()
-        fs.writeFileSync(path.join(__dirname, `../${meter}jwk.json`), JSON.stringify(jwk))
-        return jwk
-    }
+async function getWallet(meter) {
+  try {
+    let jwk = JSON.parse(
+      fs.readFileSync(path.join(__dirname, `../${meter}jwk.json`), "utf8")
+    );
+    return jwk;
+  } catch (err) {
+    let jwk = await warp.arweave.wallets.generate();
+    fs.writeFileSync(
+      path.join(__dirname, `../${meter}jwk.json`),
+      JSON.stringify(jwk)
+    );
+    return jwk;
+  }
 }
 
-deploy("meter1", "7YOvS9cqcKnuD9rBJKSS4ki3in2Y7p6UVNrk5zGDFSI")
+deploy("meter1", "fulP9_NnmU9dlw0K2NFZ6dWk6gA6oPCb_6LMm9pxsOM");
