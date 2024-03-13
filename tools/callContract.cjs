@@ -11,7 +11,7 @@ let warp = WarpFactory.forMainnet();
 async function interact(meterContractSrc) {
   let contract = warp
     .contract(meterContractSrc)
-    .connect(new ArweaveSigner(wallet));
+    .connect(wallet);
   let interactionResult = await contract.dryWrite(
     {
       data: [
@@ -20,10 +20,9 @@ async function interact(meterContractSrc) {
         [1, 7.23, 15.7],
       ],
       function: "meter",
-    },
-    "none"
+    }
   );
   console.log("result", interactionResult);
 }
 
-interact("wCzT0PDbXZ8vG00HJ1rnmz7MAw4690_tLsZb189aNww");
+interact("0q-1PEbxR8gakyOo08_LdXevixq0aelCOPHcUgM1Shs");
