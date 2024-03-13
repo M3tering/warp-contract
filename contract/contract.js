@@ -1,4 +1,4 @@
-import { convertBase64StringtoUint8Array, validate_payload } from "../logic"
+import { convertStringtoUint8Array, validate_payload } from "../logic"
 
 export function handle(state, action){
 
@@ -12,14 +12,13 @@ export function handle(state, action){
 function handle_subtract_event(state, action){
     let payload = action.input.data
     let pubkey = state.public_key
-    let convertedPubKey = convertBase64StringtoUint8Array(pubkey)
 
     if(!payload) throw new ContractError('Interaction payload missing')
 
     let nonce = payload[0]
     if(nonce < state.nonce) throw new ContractError('Invalid nonce')
     
-    let isPayloadValid = validate_payload(payload, convertedPubKey)
+    let isPayloadValid = validate_payload(payload, pubkey)
 
     if(isPayloadValid === true){
         subtract_usage_from_balance()
@@ -35,6 +34,7 @@ function handle_subtract_event(state, action){
         if(state.kwh_balance <= 0){
             state.is_on = false
         }
+        state.nonce = state.nonce + 1
     }
     return {state}
 }

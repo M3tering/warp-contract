@@ -2146,15 +2146,19 @@
   // logic.js
   var stablelib = __toESM(require_ed25519(), 1);
   async function validate_payload(payload, pubkey) {
+    let convertedPublicKey = convertStringtoUint8Array(pubkey, "base64");
     let message = JSON.stringify(payload[2]);
-    let convertedMessage = convertBase64StringtoUint8Array(message);
+    let convertedMessage = convertStringtoUint8Array(message, "utf8");
     let signature = payload[1];
-    let convertedSignature = convertBase64StringtoUint8Array(signature);
-    let isValid = stablelib.verify(pubkey, convertedMessage, convertedSignature);
+    let convertedSignature = convertStringtoUint8Array(signature, "base64");
+    let isValid = stablelib.verify(convertedPublicKey, convertedMessage, convertedSignature);
     return isValid;
   }
-  function convertBase64StringtoUint8Array(base64string) {
-    return Uint8Array.from(Buffer.from(base64string, "base64"));
+  function convertStringtoUint8Array(string, fromType) {
+    if (fromType !== "hex" && fromType !== "base64" && fromType !== "utf8") {
+      throw new ContractError("Invalid conversion from type... (hex, base64, and utf8)");
+    }
+    return Uint8Array.from(Buffer.from(string, fromType));
   }
 
   // contract/contract.js
@@ -2167,13 +2171,12 @@
   function handle_subtract_event(state, action) {
     let payload = action.input.data;
     let pubkey = state.public_key;
-    let convertedPubKey = convertBase64StringtoUint8Array(pubkey);
     if (!payload)
       throw new ContractError("Interaction payload missing");
     let nonce = payload[0];
     if (nonce < state.nonce)
       throw new ContractError("Invalid nonce");
-    let isPayloadValid = validate_payload(payload, convertedPubKey);
+    let isPayloadValid = validate_payload(payload, pubkey);
     if (isPayloadValid === true) {
       subtract_usage_from_balance();
     } else {
@@ -2186,6 +2189,7 @@
       if (state.kwh_balance <= 0) {
         state.is_on = false;
       }
+      state.nonce = state.nonce + 1;
     }
     return { state };
   }
