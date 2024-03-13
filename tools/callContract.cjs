@@ -26,4 +26,4 @@ async function interact(meterContractSrc) {
   console.log("result", interactionResult);
 }
 
-interact("WvFd62VLYuW3GGqRgWTmMyGTVeQn_G6SELzO1mI1p8U");
+interact("wCzT0PDbXZ8vG00HJ1rnmz7MAw4690_tLsZb189aNww");

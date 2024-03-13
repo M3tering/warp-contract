@@ -12,7 +12,6 @@ function validate_payload(payload, pubKey) {
   return stablelib.verify(pubKeyArray, messageArray, signatureArray);
 }
 
-
 export function handle_metering(state, action) {
   const payload = action.input.data;
   if (!payload) throw new ContractError("Interaction payload missing");
@@ -22,28 +21,21 @@ export function handle_metering(state, action) {
   //    [publicKey, signature, [nonce, current, energy]]  //
   //======================================================//
 
-  const nonce = payload[0];
+  const nonce = payload[2][0];
   if (nonce < state.nonce) throw new ContractError("Invalid nonce");
 
-  const isPayloadValid = validate_payload(payload, state.public_key);
-  if (isPayloadValid !== true)
-    throw new ContractError(`Payload is ${isPayloadValid}`);
+  const validity = validate_payload(payload, state.public_key);
+  if (validity !== true) throw new ContractError("Invalid payload");
 
-  const payload_kwh = payload[2][2];
-  state.kwh_balance -= payload_kwh * state.tariff;
-  state.nonce = nonce;
-
+  state.kwh_balance -= payload[2][2];
   if (state.kwh_balance <= 0) state.is_on = false;
+
+  state.nonce = nonce;
   return { state };
 }
 
-
 export function handle_topup(state, action) {
   // ToDo: handle payment from EVM
-}
-
-export function handle_tariff(state, action) {
-  // ToDo: handle tariff update from EVM
 }
 
 export function handle_registration(state, action) {
