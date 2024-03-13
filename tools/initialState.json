@@ -1,8 +1,7 @@
 {
     "is_on": true,
     "kwh_balance": 50,
-    "last_payment_block": 0,
-    "last_registeration_block": 0,
+    "last_block": 0,
     "nonce": 0,
     "public_key": "XUO7gdG9av1XZt3wqMLb8+FUlkgnpZstvYi9g4NAUhk=",
     "token_id": 1
