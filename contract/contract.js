@@ -1,17 +1,13 @@
-import {
-  handle_topup,
-  handle_metering,
-  handle_registration,
-} from "./logic";
+import * as handling from "./handlers.js";
 
 export function handle(state, action) {
   switch (action.input.function) {
     case "register":
-      return handle_registration(state, action);
+      return handling.registration(state, action);
     case "meter":
-      return handle_metering(state, action);
+      return handling.metering(state, action);
     case "topup":
-      return handle_topup(state, action);
+      return handling.topup(state, action);
   }
   throw new ContractError("function not recognized");
 }
@@ -19,6 +15,7 @@ export function handle(state, action) {
 /*state = {
     is_on: bool,
     kwh_balance: f64,
+    last_block: u64,
     nonce: u64,
     public_key: String,
     token_id: u64,

@@ -31,7 +31,7 @@ let data = ["FRbOjeNLlrlupvYKsfEzM0oRVspOcUAn-50gnpXkZ90", signature, [1,4.84,1]
 
 let isvalid = validate_payload(data, pubkey)
 
-console.log(isvalid)*/
+console.log(isvalid)
 
 import {ethers} from "ethers"
 import { ContractError } from "warp-contracts";
@@ -63,6 +63,8 @@ async function getTransferEvent(provider, transactionHash, lastBlockHeight, toke
   let blockHeight = paymentlog["blockNumber"]
   let address = paymentlog["address"]
 
+  console.log("paymentLof", paymentlog)
+
   console.log("parsedlog", parsedLog)
 
   let tokenIdfromEvm = Number(parsedLog.args[0])  
@@ -84,9 +86,9 @@ async function getTransferEvent(provider, transactionHash, lastBlockHeight, toke
   console.log("energy", energy, "amount_paid", amountPaid, "tariff: ",tariff, "tokenId", tokenIdfromEvm)
 
   return {
-    /*tokenId: decodedLog.tokenId,
+    tokenId: decodedLog.tokenId,
     amount: decodedLog.amount,
-    tariff: decodedLog.tariff,*/
+    tariff: decodedLog.tariff,
     energy: energy,
     newBlockHeight: blockHeight
   };
@@ -111,3 +113,21 @@ getTransferEvent(provider, transactionHash, 8712629, 0)
   .catch((error) => {
     console.error(error);
   });
+*/
+
+import { validateTxLogs, validatePayload } from "../contract/validators.js";
+import * as EVM from "../contract/constants.js";
+
+import initialState from "../tools/initialState.json" assert { type: 'json' };
+
+const { blockHeight, data } = await validateTxLogs(
+  "0xcec98cd1a62b6caa7ee43ab343dd505a8db8355bf49f221697336e047db48722",
+  initialState.last_block,
+  initialState.token_id,
+  EVM.M3TER_ADDRESS,
+  EVM.REGISTRATION_EVENT_ABI,
+  EVM.REGISTRATION_EVENT_TOPIC
+);
+
+console.log("Block Height", blockHeight);
+console.log("data", data);
