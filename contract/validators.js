@@ -1,16 +1,16 @@
-import { verify } from "@stablelib/ed25519";
 import { GNOSIS_RPC } from "./constants.js";
-
-function base64ToBytes(base64) {
-  return Uint8Array.from(atob(base64), (m) => m.codePointAt(0));
-}
+import { base64ToBytes } from "./utils.js";
 
 export function validatePayload(payload, pubKey) {
   const pubKeyArray = base64ToBytes(pubKey);
   const signatureArray = base64ToBytes(payload[1]);
   const messageArray = new TextEncoder().encode(JSON.stringify(payload[2]));
 
-  return verify(pubKeyArray, messageArray, signatureArray);
+  return SmartWeave.extensions.ed25519.verify(
+    pubKeyArray,
+    messageArray,
+    signatureArray
+  );
 }
 
 export async function validateTxLogs(
@@ -36,12 +36,10 @@ export async function validateTxLogs(
 
   //checks
   //1. blockHeight > bolckheight from state
-  if (blockHeight <= lastBlockHeight)
-    throw new Error("Block height not valid");
+  if (blockHeight <= lastBlockHeight) throw new Error("Block height not valid");
 
   //2. address == protocol adddress in code
-  if (address !== contractAddress)
-    throw new Error("Adrress is Invalid");
+  if (address !== contractAddress) throw new Error("Adrress is Invalid");
 
   //3. topic == topic in code
   if (data.topic !== eventTopic) throw new Error("Topic validation failed");

@@ -18,7 +18,8 @@
     "ethers": "^6.11.1",
     "warp-contracts": "^1.4.33",
     "warp-contracts-plugin-deploy": "^1.0.13",
-    "warp-contracts-plugin-ethers": "^1.0.8"
+    "warp-m3tering-plugin-ed25519": "file:../warp-m3tering-plugins/warp-m3tering-plugin-ed25519",
+    "warp-m3tering-plugin-ethers": "file:../warp-m3tering-plugins/warp-m3tering-plugin-ethers"
   },
   "devDependencies": {
     "esbuild": "^0.20.1",

@@ -1,16 +1,16 @@
-const { DeployPlugin, ArweaveSigner } = require("warp-contracts-plugin-deploy");
 const { WarpFactory } = require("warp-contracts");
+const { EthersExtension } = require("warp-m3tering-plugin-ethers");
+const { Ed25519Extension } = require("warp-m3tering-plugin-ed25519");
+const { DeployPlugin, ArweaveSigner } = require("warp-contracts-plugin-deploy");
 
 const fs = require("fs");
 const path = require("path");
-
 const initialState = require("./initialState.json");
 
-const environment = "mainnet";
-let warp =
-  environment == "testnet"
-    ? WarpFactory.forTestnet().use(new DeployPlugin())
-    : WarpFactory.forMainnet().use(new DeployPlugin());
+let warp = WarpFactory.forMainnet()
+  .use(new DeployPlugin())
+  .use(new EthersExtension())
+  .use(new Ed25519Extension());
 
 async function deploy() {
   try {
@@ -29,17 +29,10 @@ async function deploy() {
       src: contractSrc,
     });
 
-    if (environment == "testnet") {
-      fs.writeFileSync(
-        path.join(__dirname, "../contractdets.json"),
-        JSON.stringify(contractDets)
-      );
-    } else {
-      fs.writeFileSync(
-        path.join(__dirname, "../mainnetContractDets.json"),
-        JSON.stringify(contractDets)
-      );
-    }
+    fs.writeFileSync(
+      path.join(__dirname, "../mainnetContractDets.json"),
+      JSON.stringify(contractDets)
+    );
     console.log(contractDets);
   } catch (err) {
     console.log("deploy error: ", err);

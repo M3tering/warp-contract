@@ -1,4 +1,6 @@
 import { validateTxLogs, validatePayload } from "./validators";
+import { hexToBase64 } from "./utils.js";
+
 import * as EVM from "./constants";
 
 export async function registration(state, action) {
@@ -11,7 +13,7 @@ export async function registration(state, action) {
     EVM.REGISTRATION_EVENT_TOPIC
   );
 
-  const publicKey = data.args[1];
+  const publicKey = hexToBase64(data.args[1]);
 
   state.last_block = blockHeight;
   state.public_key = publicKey;
