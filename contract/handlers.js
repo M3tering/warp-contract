@@ -4,13 +4,16 @@ import { hexToBase64 } from "./utils.js";
 import * as EVM from "./constants";
 
 export async function registration(state, action) {
+  const txHash = action.input.txHash;
+  if (!txHash) throw new ContractError("Interaction txHash missing");
+
   const { blockHeight, data } = await validateTxLogs(
-    action.input.data.transaction_hash,
-    state.last_block,
+    txHash,
     state.token_id,
+    state.last_block,
     EVM.M3TER_ADDRESS,
     EVM.REGISTRATION_EVENT_ABI,
-    EVM.REGISTRATION_EVENT_TOPIC
+    EVM.REGISTRATION_EVENT_TOPIC,
   );
 
   const publicKey = hexToBase64(data.args[1]);
@@ -22,13 +25,16 @@ export async function registration(state, action) {
 }
 
 export async function topup(state, action) {
+  const txHash = action.input.txHash;
+  if (!txHash) throw new ContractError("Interaction txHash missing");
+
   const { blockHeight, data } = await validateTxLogs(
-    action.input.data.transaction_hash,
-    state.last_block,
+    txHash,
     state.token_id,
+    state.last_block,
     EVM.PROTOCOL_ADDRESS,
     EVM.REVENUE_EVENT_ABI,
-    EVM.REVENUE_EVENT_TOPIC
+    EVM.REVENUE_EVENT_TOPIC,
   );
 
   const amountPaid = Number(data.args[1]) / 1e18;

@@ -10,6 +10,6 @@ export function hexToBase64(hexString) {
       .map(function (a) {
         return String.fromCharCode(parseInt(a, 16));
       })
-      .join("")
+      .join(""),
   );
 }

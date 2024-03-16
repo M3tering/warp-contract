@@ -9,17 +9,17 @@ export function validatePayload(payload, pubKey) {
   return SmartWeave.extensions.ed25519.verify(
     pubKeyArray,
     messageArray,
-    signatureArray
+    signatureArray,
   );
 }
 
 export async function validateTxLogs(
   txHash,
-  lastBlockHeight,
   tokenIdFromState,
+  lastBlockHeight,
   contractAddress,
   eventAbi,
-  eventTopic
+  eventTopic,
 ) {
   const provider = new SmartWeave.extensions.ethers.JsonRpcProvider(GNOSIS_RPC);
 

@@ -5,24 +5,26 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "node tests/test.js",
-    "deploy": "node tools/deploy.cjs",
-    "build": "node build.js",
-    "deployMeter": "node tools/simulateMeters.cjs",
-    "callContract": "node tools/callContract.cjs"
+    "clean": "rimraf bundle",
+    "build": "rimraf bundle && node tools/build.js",
+    "deploy": "node tools/deploy.js",
+    "format": "prettier --write 'contract/*.js'",
+    "interact": "node tools/interact.js",
+    "redeploy": "node tools/redeploy.js",
+    "test": "node tests/test.js"
   },
   "author": "",
-  "license": "ISC",
+  "license": "MIT",
   "dependencies": {
-    "@stablelib/ed25519": "^1.0.3",
-    "ethers": "^6.11.1",
+    "m3tering-ed25519": "^1.0.1",
+    "m3tering-ethers": "^1.0.1",
     "warp-contracts": "^1.4.33",
-    "warp-contracts-plugin-deploy": "^1.0.13",
-    "warp-m3tering-plugin-ed25519": "file:../warp-m3tering-plugins/warp-m3tering-plugin-ed25519",
-    "warp-m3tering-plugin-ethers": "file:../warp-m3tering-plugins/warp-m3tering-plugin-ethers"
+    "warp-contracts-plugin-deploy": "^1.0.13"
   },
   "devDependencies": {
-    "esbuild": "^0.20.1",
-    "replace-in-file": "^7.1.0"
+    "esbuild": "*",
+    "prettier": "*",
+    "replace-in-file": "*",
+    "rimraf": "*"
   }
 }
