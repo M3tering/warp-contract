@@ -11,10 +11,9 @@ const warp = WarpFactory.forMainnet()
   .use(new EthersExtension())
   .use(new DeployPlugin());
 
-async function deploy(tokenId, publicKey, sourceTxId) {
+async function deploy(tokenId, sourceTxId) {
   const state = initialState;
   state.token_id = tokenId;
-  state.public_key = publicKey;
 
   try {
     const wallet = await warp.arweave.wallets.generate();
@@ -29,8 +28,4 @@ async function deploy(tokenId, publicKey, sourceTxId) {
   }
 }
 
-deploy(
-  2,
-  "F2L+7R0Txta/7M9xZa3HoAD0qiY9HBV3SDiqmdtME54=",
-  "f13sckWCTT2dez4vEcJ7r_3gyTQmk1WJQCrzcn81NlE"
-);
+deploy(2, "f13sckWCTT2dez4vEcJ7r_3gyTQmk1WJQCrzcn81NlE");

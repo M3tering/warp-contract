@@ -41,6 +41,6 @@ async function interact_meter(meterContractSrc) {
   console.log("result", interactionResult);
 }
 
-interact_register("FqYq9EnbMfKCKz6s54xusNQ7RylsmTLB_o8u6xYXPU8");
-interact_meter("FqYq9EnbMfKCKz6s54xusNQ7RylsmTLB_o8u6xYXPU8");
-// interact_topup("FqYq9EnbMfKCKz6s54xusNQ7RylsmTLB_o8u6xYXPU8");
+interact_register("F8ipwn99-OgVyuja_rGyiEtI216NZiF-viZbUzeSGco");
+interact_meter("F8ipwn99-OgVyuja_rGyiEtI216NZiF-viZbUzeSGco");
+interact_topup("nOUT-A6s1N-YEGd-sdQet2G_QWHJPuC16PAI0w1vIUI");

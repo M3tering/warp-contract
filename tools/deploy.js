@@ -11,12 +11,12 @@ const warp = WarpFactory.forMainnet()
   .use(new EthersExtension())
   .use(new DeployPlugin());
 
-async function deploy() {
+async function deploy(tokenId) {
   try {
-    const wallet = await warp.arweave.wallets.generate();
     const contractSrc = fs.readFileSync("bundle/contract.js", "utf8");
+    initialState.token_id = tokenId;
     const contractDetails = await warp.deploy({
-      wallet: new ArweaveSigner(wallet),
+      wallet: new ArweaveSigner(await warp.arweave.wallets.generate()),
       initState: JSON.stringify(initialState),
       src: contractSrc,
     });
@@ -26,4 +26,4 @@ async function deploy() {
   }
 }
 
-deploy();
+deploy(1);

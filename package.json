@@ -1,20 +1,19 @@
 {
   "name": "warp-m3tering-contract",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
+  "description": "Implements a warp contract for the M3tering Protocol",
+  "author": "Switch Electric",
+  "license": "MIT",
   "type": "module",
   "scripts": {
     "clean": "rimraf bundle",
     "build": "rimraf bundle && node tools/build.js",
-    "deploy": "node tools/deploy.js",
-    "format": "prettier --write 'contract/*.js'",
+    "deploy": "rimraf bundle && node tools/build.js && node tools/deploy.js",
+    "redeploy": "rimraf bundle && node tools/build.js && node tools/redeploy.js",
+    "format": "prettier --write 'contract/*.ts'",
     "interact": "node tools/interact.js",
-    "redeploy": "node tools/redeploy.js",
     "test": "node tests/test.js"
   },
-  "author": "",
-  "license": "MIT",
   "dependencies": {
     "m3tering-ed25519": "^1.0.1",
     "m3tering-ethers": "^1.0.1",
