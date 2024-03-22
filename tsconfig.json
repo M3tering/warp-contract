@@ -6,7 +6,7 @@
       "preserveConstEnums": true,
       "outFile": "./bundle/contract.js",
       "sourceRoot": "./contract/",
-      "rootDir": "./contract/",
+      "rootDir": "./",
       "inlineSourceMap": true,
       "noImplicitAny": true,
      }

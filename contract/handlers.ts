@@ -1,9 +1,4 @@
-import { hexToBase64 } from "./utils";
 import { validateTxLogs, validatePayload } from "./validators";
-import { EvmAction, MeterAction, State } from "./types";
-
-declare const ContractError: any;
-
 import { EVM_CONFIG } from "./constants";
 
 export async function register(state: State, action: EvmAction) {
@@ -19,10 +14,10 @@ export async function register(state: State, action: EvmAction) {
     txHash,
   );
 
-  const publicKey = hexToBase64(data.args[1]);
-
   state.last_block = blockHeight;
-  state.public_key = publicKey;
+  state.public_key = SmartWeave.extensions.ethers
+    .encodeBase64(data.args[1])
+    .toString();
 
   return { state };
 }

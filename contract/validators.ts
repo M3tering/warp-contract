@@ -1,18 +1,10 @@
-import { base64ToBytes } from "./utils";
 import { EVM_CONFIG } from "./constants";
-import { Payload } from "./types";
-
-declare const SmartWeave: any;
 
 export function validatePayload(payload: Payload, pubKey: string) {
-  const pubKeyArray = base64ToBytes(pubKey);
-  const signatureArray = base64ToBytes(payload[1]);
-  const messageArray = new TextEncoder().encode(JSON.stringify(payload[2]));
-
   return SmartWeave.extensions.ed25519.verify(
-    pubKeyArray,
-    messageArray,
-    signatureArray,
+    SmartWeave.extensions.ethers.decodeBase64(pubKey), // pubkey
+    new TextEncoder().encode(JSON.stringify(payload[2])), // message
+    SmartWeave.extensions.ethers.decodeBase64(payload[1]), // signature
   );
 }
 

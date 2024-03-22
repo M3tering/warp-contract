@@ -1,7 +1,4 @@
 import { register, topup, meter } from "./handlers";
-import { EvmAction, MeterAction, State } from "./types";
-
-declare const ContractError: any;
 
 export function handle(state: State, action: EvmAction | MeterAction) {
   switch (action.input.function) {

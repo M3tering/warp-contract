@@ -12,7 +12,7 @@
     "redeploy": "rimraf bundle && tsc &&  node tools/build.js && node tools/redeploy.js",
     "format": "prettier --write 'contract/*.ts'",
     "interact": "node tools/interact.js",
-    "test": "node tests/test.js"
+    "test": "ts-node --esm tests/test.ts"
   },
   "dependencies": {
     "m3tering-ed25519": "^1.0.1",
