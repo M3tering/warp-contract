@@ -3,7 +3,7 @@ import { EvmAction, MeterAction, State } from "./types";
 
 declare const ContractError: any;
 
-export function handle(state: State, action) {
+export function handle(state: State, action: EvmAction | MeterAction) {
   switch (action.input.function) {
     case "register":
       return register(state, action as EvmAction);

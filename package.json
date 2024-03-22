@@ -7,9 +7,9 @@
   "type": "module",
   "scripts": {
     "clean": "rimraf bundle",
-    "build": "rimraf bundle && node tools/build.js",
-    "deploy": "rimraf bundle && node tools/build.js && node tools/deploy.js",
-    "redeploy": "rimraf bundle && node tools/build.js && node tools/redeploy.js",
+    "build": "rimraf bundle && tsc &&  node tools/build.js",
+    "deploy": "rimraf bundle && tsc &&  node tools/build.js && node tools/deploy.js",
+    "redeploy": "rimraf bundle && tsc &&  node tools/build.js && node tools/redeploy.js",
     "format": "prettier --write 'contract/*.ts'",
     "interact": "node tools/interact.js",
     "test": "node tests/test.js"
