@@ -1,5 +1,4 @@
 import { WarpFactory } from "warp-contracts";
-import { WarpFactory } from "warp-contracts";
 import { EthersExtension } from "m3tering-ethers";
 import { Ed25519Extension } from "m3tering-ed25519";
 import { DeployPlugin, ArweaveSigner } from "warp-contracts-plugin-deploy";
