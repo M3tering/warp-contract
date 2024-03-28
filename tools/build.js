@@ -2,7 +2,7 @@ import * as esbuild from "esbuild"
 import replace from "replace-in-file"
 
 await esbuild.build({
-    entryPoints: ['contract/contract.js'],
+    entryPoints: ['contract/contract.ts'],
     minify: false,
     bundle: true,
     outdir: 'bundle',

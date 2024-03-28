@@ -10,15 +10,19 @@ const warp = WarpFactory.forMainnet()
   .use(new Ed25519Extension())
   .use(new EthersExtension())
   .use(new DeployPlugin());
+const tags = [
+  { name: "App-User", value: "M3ters" },
+  { name: "App-Label", value: "M3tering Protocol" },
+];
 
-async function deploy() {
+async function deploy(tokenId) {
   try {
-    const wallet = await warp.arweave.wallets.generate();
-    const contractSrc = fs.readFileSync("bundle/contract.js", "utf8");
+    initialState.token_id = tokenId;
     const contractDetails = await warp.deploy({
-      wallet: new ArweaveSigner(wallet),
+      wallet: new ArweaveSigner(await warp.arweave.wallets.generate()),
+      src: fs.readFileSync("bundle/contract.js", "utf8"),
       initState: JSON.stringify(initialState),
-      src: contractSrc,
+      tags,
     });
     console.log(contractDetails);
   } catch (err) {
@@ -26,4 +30,4 @@ async function deploy() {
   }
 }
 
-deploy();
+deploy(1);
