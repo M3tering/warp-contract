@@ -11,8 +11,8 @@ const warp = WarpFactory.forMainnet()
   .use(new EthersExtension())
   .use(new DeployPlugin());
 const tags = [
-  { name: "App-User", value: "M3ters" },
-  { name: "App-Label", value: "M3tering Protocol" },
+  { name: "Contract-Label", value: "M3ters" },
+  { name: "Contract-Use", value: "M3tering Protocol" },
 ];
 
 async function deploy(tokenId) {

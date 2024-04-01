@@ -8,8 +8,8 @@ const warp = WarpFactory.forMainnet()
 
 const wallet = await warp.arweave.wallets.generate();
 const tags = [
-  { name: "App-User", value: "M3ters" },
-  { name: "App-Label", value: "M3tering Protocol" },
+  { name: "Contract-Label", value: "M3ters" },
+  { name: "Contract-Use", value: "M3tering Protocol" },
 ];
 
 async function interact_evm(contractId, func, txHash) {
