@@ -52,14 +52,13 @@ export function meter(state: State, action: MeterAction) {
   // PAYLOAD: ["[nonce, voltage, current, energy]", "signature", "publicKey"] //
   //==========================================================================//
 
-  const data: Data = JSON.parse(payload[0]);
-  const nonce = data[0];
-  if (nonce <= state.nonce) throw new ContractError("Invalid nonce");
-
   const validity = validatePayload(payload, state.public_key);
   if (validity !== true) throw new ContractError("Invalid payload");
 
-  state.kwh_balance -= data[3];
+  const [nonce, , , energy] = JSON.parse(payload[0]);
+  if (nonce <= state.nonce) throw new ContractError("Invalid nonce");
+
+  state.kwh_balance -= energy;
   if (state.kwh_balance <= 0) state.is_on = false;
 
   state.nonce = nonce;

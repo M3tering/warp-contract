@@ -30,8 +30,8 @@ async function interact_meter(meterContractSrc) {
     {
       function: "meter",
       payload: [
-        "[656, 220, 2.08, 0.049566]",
-        "N04iKIOS0QdYzz/Vsjwuc49WVtz5g6z7CuHsRfuAqdJ+PZBdQDC4W8TurKoPC6K+nOKzObxAfEFgvSzTfoCIBw==",
+        "[0,218.4,0.47,0.009708]",
+        "iSSc6rP+WNvA+HsMuHx4kXvb4uo4+qgsQr1txwA2ljIwmk/RHWjGN7QSw9nFGBWmdozbe9rBq5fE+UVVYjEvCg==",
         "3hJqbHdoQszEh8ilx12DHNH3kKWjDao3QIUeAgVolHw=",
       ],
     },
@@ -40,12 +40,12 @@ async function interact_meter(meterContractSrc) {
   console.log("result", interactionResult);
 }
 
-// interact_meter("m7wJDX7pNCNRAfqFax5fUTWx5xfmgKVU9K7-0CqNGBo");
-interact_evm(
-  "m7wJDX7pNCNRAfqFax5fUTWx5xfmgKVU9K7-0CqNGBo",
-  "register",
-  "0xb468900b039d9620c2a2afd72185d8f67b457661978aea7e9a6b9d6ec0155cdf"
-);
+interact_meter("3xdOXgJ3mDMSNoLdBCKj9g4RpRa-l_1uJwAH3VwF-Pw");
+// interact_evm(
+//   "3xdOXgJ3mDMSNoLdBCKj9g4RpRa-l_1uJwAH3VwF-Pw",
+//   "register",
+//   "0xb468900b039d9620c2a2afd72185d8f67b457661978aea7e9a6b9d6ec0155cdf"
+// );
 // interact_evm(
 //   "nOUT-A6s1N-YEGd-sdQet2G_QWHJPuC16PAI0w1vIUI",
 //   "topup",

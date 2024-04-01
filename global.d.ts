@@ -32,14 +32,7 @@ declare global {
     nonce: number;
     public_key: string;
     token_id: number;
-  }
-
-  interface Data {
-    0: number;
-    1: number;
-    2: number;
-    3: number;
-  }  
+  } 
 }
 
 export default global;
