@@ -18,6 +18,7 @@ const tags = [
 async function deploy(tokenId) {
   try {
     initialState.token_id = tokenId;
+    initialState.kwh_balance = 1e5;
     const contractDetails = await warp.deploy({
       wallet: new ArweaveSigner(await warp.arweave.wallets.generate()),
       src: fs.readFileSync("bundle/contract.js", "utf8"),

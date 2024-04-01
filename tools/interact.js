@@ -14,7 +14,7 @@ const tags = [
 
 async function interact_evm(contractId, func, txHash) {
   const contract = warp.contract(contractId).connect(wallet);
-  const interactionResult = await contract.dryWrite(
+  const interactionResult = await contract.writeInteraction(
     {
       function: func,
       txHash,
@@ -32,7 +32,7 @@ async function interact_meter(meterContractSrc) {
       data: [
         "3hJqbHdoQszEh8ilx12DHNH3kKWjDao3QIUeAgVolHw=",
         "N04iKIOS0QdYzz/Vsjwuc49WVtz5g6z7CuHsRfuAqdJ+PZBdQDC4W8TurKoPC6K+nOKzObxAfEFgvSzTfoCIBw==",
-        [656, 2.08, 0.049566],
+        [656, 220, 2.08, 0.049566],
       ],
     },
     { tags }
@@ -40,9 +40,9 @@ async function interact_meter(meterContractSrc) {
   console.log("result", interactionResult);
 }
 
-// interact_meter("4A3sCQ-fWlzSc17He_mPd_s3QTbPuzzOmrR_RAkPPv8");
+// interact_meter("QGmbDfSMLpFJsfpByxoA6CN_j9uSL3ozhbItMNsSHIs");
 interact_evm(
-  "4A3sCQ-fWlzSc17He_mPd_s3QTbPuzzOmrR_RAkPPv8",
+  "QGmbDfSMLpFJsfpByxoA6CN_j9uSL3ozhbItMNsSHIs",
   "register",
   "0xb468900b039d9620c2a2afd72185d8f67b457661978aea7e9a6b9d6ec0155cdf"
 );
