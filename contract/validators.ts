@@ -3,8 +3,8 @@ import { EVM_CONFIG } from "./constants";
 export function validatePayload(payload: Payload, pubKey: string) {
   return SmartWeave.extensions.ed25519.verify(
     SmartWeave.extensions.ethers.decodeBase64(pubKey), // pubkey
-    new TextEncoder().encode(JSON.stringify(payload[2])), // message
-    SmartWeave.extensions.ethers.decodeBase64(payload[1]), // signature
+    new TextEncoder().encode(JSON.stringify(payload[0])), // data
+    SmartWeave.extensions.ethers.decodeBase64(payload[2]), // signature
   );
 }
 

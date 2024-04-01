@@ -15,14 +15,14 @@ declare global {
   }
 
   interface MeterInput {
-    data: Payload;
+    payload: Payload;
     function: string;
   }
 
   interface Payload {
     0: string;
     1: string;
-    2: number[];
+    2: string;
   }
 
   interface State {
@@ -33,6 +33,13 @@ declare global {
     public_key: string;
     token_id: number;
   }
+
+  interface Data {
+    0: number;
+    1: number;
+    2: number;
+    3: number;
+  }  
 }
 
 export default global;

@@ -29,10 +29,10 @@ async function interact_meter(meterContractSrc) {
   const interactionResult = await contract.dryWrite(
     {
       function: "meter",
-      data: [
-        "3hJqbHdoQszEh8ilx12DHNH3kKWjDao3QIUeAgVolHw=",
+      payload: [
+        "[656, 220, 2.08, 0.049566]",
         "N04iKIOS0QdYzz/Vsjwuc49WVtz5g6z7CuHsRfuAqdJ+PZBdQDC4W8TurKoPC6K+nOKzObxAfEFgvSzTfoCIBw==",
-        [656, 220, 2.08, 0.049566],
+        "3hJqbHdoQszEh8ilx12DHNH3kKWjDao3QIUeAgVolHw=",
       ],
     },
     { tags }
@@ -40,9 +40,9 @@ async function interact_meter(meterContractSrc) {
   console.log("result", interactionResult);
 }
 
-// interact_meter("QGmbDfSMLpFJsfpByxoA6CN_j9uSL3ozhbItMNsSHIs");
+// interact_meter("m7wJDX7pNCNRAfqFax5fUTWx5xfmgKVU9K7-0CqNGBo");
 interact_evm(
-  "QGmbDfSMLpFJsfpByxoA6CN_j9uSL3ozhbItMNsSHIs",
+  "m7wJDX7pNCNRAfqFax5fUTWx5xfmgKVU9K7-0CqNGBo",
   "register",
   "0xb468900b039d9620c2a2afd72185d8f67b457661978aea7e9a6b9d6ec0155cdf"
 );
