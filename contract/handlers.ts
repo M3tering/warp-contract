@@ -48,10 +48,9 @@ export function meter(state: State, action: MeterAction) {
   const payload = action.input.data;
   if (!payload) throw new ContractError("Interaction payload missing");
 
-  //======================================================//
-  // PAYLOAD:                                             //
-  //    [publicKey, signature, [nonce, current, energy]]  //
-  //======================================================//
+  //=====================================================================//
+  // PAYLOAD: [publicKey, signature, [nonce, voltage, current, energy]]  //
+  //=====================================================================//
 
   const nonce = payload[2][0];
   if (nonce <= state.nonce) throw new ContractError("Invalid nonce");
@@ -59,7 +58,7 @@ export function meter(state: State, action: MeterAction) {
   const validity = validatePayload(payload, state.public_key);
   if (validity !== true) throw new ContractError("Invalid payload");
 
-  state.kwh_balance -= payload[2][2];
+  state.kwh_balance -= payload[2][3];
   if (state.kwh_balance <= 0) state.is_on = false;
 
   state.nonce = nonce;
