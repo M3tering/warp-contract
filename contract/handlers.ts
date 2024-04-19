@@ -6,9 +6,9 @@ export async function register(state: State, action: EvmAction) {
   if (!txHash) throw new ContractError("Interaction txHash missing");
 
   const { blockHeight, data } = await validateTxLogs(
+    EVM_CONFIG.M3TER_CONTRACT_ADDRESS,
     EVM_CONFIG.REGISTRATION_EVENT_TOPIC,
     EVM_CONFIG.REGISTRATION_EVENT_ABI,
-    EVM_CONFIG.M3TER_ADDRESS,
     state.last_block,
     state.token_id,
     txHash,
@@ -27,9 +27,9 @@ export async function topup(state: State, action: EvmAction) {
   if (!txHash) throw new ContractError("Interaction txHash missing");
 
   const { blockHeight, data } = await validateTxLogs(
+    EVM_CONFIG.PROTOCOL_CONTRACT_ADDRESS,
     EVM_CONFIG.REVENUE_EVENT_TOPIC,
     EVM_CONFIG.REVENUE_EVENT_ABI,
-    EVM_CONFIG.PROTOCOL_ADDRESS,
     state.last_block,
     state.token_id,
     txHash,

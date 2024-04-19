@@ -9,15 +9,15 @@ export function validatePayload(payload: Payload, pubKey: string) {
 }
 
 export async function validateTxLogs(
+  contractAddress: string,
   eventTopic: string,
   eventAbi: string[],
-  contractAddress: string,
   lastBlockHeight: number,
   tokenIdInState: number,
   txHash: string,
 ) {
   const provider = new SmartWeave.extensions.ethers.JsonRpcProvider(
-    EVM_CONFIG.GNOSIS_RPC,
+    EVM_CONFIG.RPC_ENDPOINT,
   );
 
   const receipt = await provider.getTransactionReceipt(txHash);
