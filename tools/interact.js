@@ -10,6 +10,7 @@ const wallet = await warp.arweave.wallets.generate();
 const tags = [
   { name: "Contract-Label", value: "M3ters" },
   { name: "Contract-Use", value: "M3tering Protocol" },
+  { name: "Content-Type", value: "application/json" },
 ];
 
 async function interact_evm(contractId, func, txHash) {
@@ -35,7 +36,7 @@ async function interact_meter(meterContractSrc) {
         "3hJqbHdoQszEh8ilx12DHNH3kKWjDao3QIUeAgVolHw=",
       ],
     },
-    { tags }
+    { tags, inputFormatAsData: true }
   );
   console.log("result", interactionResult);
 }
