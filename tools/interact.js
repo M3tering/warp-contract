@@ -20,7 +20,7 @@ async function interact_evm(contractId, func, txHash) {
       function: func,
       txHash,
     },
-    { tags }
+    { tags, inputFormatAsData: true }
   );
   console.log("result", interactionResult);
 }

@@ -15,14 +15,18 @@ const tags = [
   { name: "Contract-Use", value: "M3tering Protocol" },
 ];
 
-async function deploy(tokenId) {
+async function deploy(tokenId, devEUI, appEUI, appKey) {
   try {
-    initialState.token_id = tokenId;
-    initialState.kwh_balance = 1e5;
+    const state = initialState;
+    state.token_id = tokenId;
+    state.dev_eui = devEUI;
+    state.app_eui = appEUI;
+    state.app_key = appKey;
+
     const contractDetails = await warp.deploy({
       wallet: new ArweaveSigner(await warp.arweave.wallets.generate()),
       src: fs.readFileSync("bundle/contract.js", "utf8"),
-      initState: JSON.stringify(initialState),
+      initState: JSON.stringify(state),
       tags,
     });
     console.log(contractDetails);
@@ -31,4 +35,4 @@ async function deploy(tokenId) {
   }
 }
 
-deploy(1);
+deploy(1, "...", "...", "...");
