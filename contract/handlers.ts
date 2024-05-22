@@ -39,7 +39,7 @@ export async function topup(state: State, action: EvmAction) {
   const tariff = Number(data.args[2]) / 1e18;
 
   state.last_block = blockHeight;
-  state.kwh_balance += amountPaid * tariff;
+  state.kwh_balance += amountPaid / tariff;
 
   return { state };
 }
