@@ -3,7 +3,7 @@
     "app_key": 0,
     "dev_eui": 0,
     "is_on": true,
-    "kwh_balance": 25,
+    "kwh_balance": 0,
     "last_block": 0,
     "nonce": 0,
     "public_key": "",
