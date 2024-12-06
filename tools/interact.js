@@ -41,14 +41,14 @@ async function interact_meter(meterContractSrc) {
   console.log("result", interactionResult);
 }
 
-interact_meter("3xdOXgJ3mDMSNoLdBCKj9g4RpRa-l_1uJwAH3VwF-Pw");
+// interact_meter("CNHh0EvGy13WQ1x9yN58-M0qRvEeRavON70jt4H0mh8");
 // interact_evm(
-//   "3xdOXgJ3mDMSNoLdBCKj9g4RpRa-l_1uJwAH3VwF-Pw",
+//   "CNHh0EvGy13WQ1x9yN58-M0qRvEeRavON70jt4H0mh8",
 //   "register",
-//   "0xb468900b039d9620c2a2afd72185d8f67b457661978aea7e9a6b9d6ec0155cdf"
+//   "0x98e92e0fddbf182af556c7febfb290ba9904ff311749100dc790b600a2e586b5"
 // );
-// interact_evm(
-//   "nOUT-A6s1N-YEGd-sdQet2G_QWHJPuC16PAI0w1vIUI",
-//   "topup",
-//   "0x26296b719bdf4706da093381cc03da11fc91b94e8b7a8e4893433a712b9d650a"
-// );
+interact_evm(
+  "CNHh0EvGy13WQ1x9yN58-M0qRvEeRavON70jt4H0mh8",
+  "topup",
+  "0x6070ed5b83cf9de52e0dfb0196657f93a34d89a1c2ee4da9fbd13202521bfe94"
+);
