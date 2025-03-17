@@ -30,4 +30,4 @@ async function deploy(tokenId, devEUI, appEUI, appKey, sourceTxId) {
   }
 }
 
-deploy(1, "...", "...", "...", "...");
+deploy(1, "203cdd2af9233401", "3320a52bffd91500", "0109000405103cab1c1d1e1f202a22fe", "hlS-mRj_h3H1v30oNYl4EZsd1fOuvqdS1kvVh4Vrer4");

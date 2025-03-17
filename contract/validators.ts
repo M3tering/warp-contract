@@ -8,6 +8,15 @@ export function validatePayload(payload: Payload, pubKey: string) {
   );
 }
 
+  //===============================[ TODO ]======================================//
+  //    THIS IS SLATTED TO BE REPLACED WITH A CCIP READ CALL TO ETHEREUM L1      //
+  // USING <SmartWeave.contract.id> TO RETURN TALLY VALUE FOR A CALLING CONTRACT //
+  // ____________________________________________________________________________//
+  // ...                                                                         //
+  //  let X = new SmartWeave.extensions.ethers.Contract(address, abi, provider)  // 
+  //  let value = await X.method(...params, {enableCcipRead: true});             //
+  // ...                                                                         //
+  //=============================================================================//
 export async function validateTxLogs(
   contractAddress: string,
   eventTopic: string,

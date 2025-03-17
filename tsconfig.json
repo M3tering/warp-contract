@@ -1,14 +1,13 @@
 {
-    "compilerOptions": {
-      "target": "ES5",
-      "module": "AMD",
-      "removeComments": false,
-      "preserveConstEnums": true,
-      "outFile": "./bundle/contract.js",
-      "sourceRoot": "./contract/",
-      "rootDir": "./",
-      "inlineSourceMap": true,
-      "noImplicitAny": true,
-     }
+  "compilerOptions": {
+    "target": "ES5",
+    "module": "AMD",
+    "removeComments": false,
+    "preserveConstEnums": true,
+    "outFile": "./bundle/contract.js",
+    "sourceRoot": "./contract/",
+    "rootDir": "./",
+    "inlineSourceMap": true,
+    "noImplicitAny": true,
   }
-  
+}
