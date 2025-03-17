@@ -40,6 +40,7 @@ export async function topup(state: State, action: EvmAction) {
 
   state.last_block = blockHeight;
   state.kwh_balance += amountPaid / tariff;
+  if (state.kwh_balance > 0) state.is_on = true;
 
   return { state };
 }
